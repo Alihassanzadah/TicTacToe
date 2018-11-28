@@ -9,19 +9,39 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+<style>
+.cell {
+  width: 33.333%;
+  height: 90px;
+  border: 6px solid #2c3e50;
+  font-size: 3.5em;
+  font-family: 'Gochi Hand', sans-serif;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+.cell:hover {
+    background-color: #7f8c8d;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+
+.cell::after {
+  content: '';
+  display: block;
 }
-a {
-  color: #42b983;
+
+.cell:first-of-type {
+  border-left-color: transparent;
+  border-top-color: transparent;
+}
+
+.cell:nth-of-type(2) {
+  border-top-color: transparent;
+}
+
+.cell:nth-of-type(3) {
+  border-right-color: transparent;
+  border-top-color: transparent;
+}
+
+tr:nth-of-type(3) .cell {
+  border-bottom-color: transparent;
 }
 </style>
