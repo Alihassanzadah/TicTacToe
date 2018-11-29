@@ -1,36 +1,63 @@
 <template>
-<div>
-<div class="gameStatusMessage"  :class="gameStatusColor">
-  {{ gameStatusMessage}}
-
-</div>
-<table class="grid">
-  <tr>
-    <cell name="1"></cell>
-    <cell name="2"></cell>
-    <cell name="3"></cell>
-  </tr>
-  <tr>
-    <cell name="4"></cell>
-    <cell name="5"></cell>
-    <cell name="6"></cell>
-  </tr>
-  <tr>
-    <cell name="7"></cell>
-    <cell name="8"></cell>
-    <cell name="9"></cell>
-  </tr>
-</table>
-</div>
-
-
+  <div>
+    <div class="gameStatus" :class="gameStatusColor">{{ gameStatusMessage}}</div>
+    <table class="grid">
+      <tr>
+        <cell name="1"></cell>
+        <cell name="2"></cell>
+        <cell name="3"></cell>
+      </tr>
+      <tr>
+        <cell name="4"></cell>
+        <cell name="5"></cell>
+        <cell name="6"></cell>
+      </tr>
+      <tr>
+        <cell name="7"></cell>
+        <cell name="8"></cell>
+        <cell name="9"></cell>
+      </tr>
+    </table>
+  </div>
 </template>
 <script>
-import Cell from './Cell.vue'
+import Cell from "./Cell.vue";
 
 export default {
   components: { Cell },
-}
+
+  data() {
+    return {
+      activePlayer: 'O',
+
+      gameStatus: "turn",
+
+      gameStatusMessage: `O' turn`,
+
+      gameStatusColor: 'statusTurn',
+
+      moves: 0,
+
+    }
+  },
+ computed: {
+    // helper property to get the non-active player
+    nonActivePlayer () {
+        if (this.activePlayer === 'O') {
+            return 'X'
+        }
+
+        return 'O'
+    }
+},
+  methods: {
+    changePlayer () {
+    this.activePlayer = this.nonActivePlayer
+},
+
+  },
+
+};
 </script>
 <style>
 .grid {
@@ -46,20 +73,20 @@ export default {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   background-color: #f1c40f;
-  color: #fff;    
+  color: #fff;
   font-size: 1.4em;
   font-weight: bold;
 }
 
 .statusTurn {
-    background-color: #f1c40f;
+  background-color: #f1c40f;
 }
 
 .statusWin {
-    background-color: #2ecc71;
+  background-color: #2ecc71;
 }
 
 .statusDraw {
-    background-color: #9b59b6;
+  background-color: #9b59b6;
 }
 </style>

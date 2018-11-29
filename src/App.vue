@@ -1,9 +1,18 @@
 <template>
+<div>
+  <div class="scoreBoard">
+      <span>O has {{ wins.O }} wins</span>
+      <h2>Score Board</h2>
+      <span>X has {{ wins.X }} wins</span>
+    </div>
   <div id="app">
   <div id="details">
     <h1>Tic Tac Toe</h1>
+    <h2>Match #{{ matsches + 1 }}</h2>
   </div>
   <grid></grid>
+  <button class ="restart" @click= "restart">Restart</button>
+</div>
 </div>
 </template>
 
@@ -12,7 +21,28 @@ import Grid from './components/Grid.vue'
 
 export default {
   components: { Grid },
-  name: 'app'
+  name: 'app',
+  data() {
+    return {
+      matsches: 0,
+      wins: {
+        O: 0,
+        X: 0
+      }
+    }
+
+  },
+  methods: {
+    restart () {
+      Event.$emit('clearCell')
+
+      Event.$emit ('gridReset')
+      this.matsches++
+    }
+  },
+  created () {
+    Event.$on ('win' , winner => this.wins[winner]++)
+  }
 }
 </script>
 <style>
